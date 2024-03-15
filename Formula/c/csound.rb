@@ -1,12 +1,22 @@
 class Csound < Formula
   desc "Sound and music computing system"
   homepage "https://csound.com"
-  url "https://github.com/csound/csound.git",
-      tag:      "6.18.1",
-      revision: "a1580f9cdf331c35dceb486f4231871ce0b00266"
   license "LGPL-2.1-or-later"
-  revision 6
+  revision 7
   head "https://github.com/csound/csound.git", branch: "master"
+
+  # Remove `stable` block when patch is no longer needed
+  stable do
+    url "https://github.com/csound/csound.git",
+        tag:      "6.18.1",
+        revision: "a1580f9cdf331c35dceb486f4231871ce0b00266"
+
+    # LLVM 18 support
+    patch do
+      url "https://github.com/csound/csound/commit/2a071ae8ca89bc21b5c80037f8c95a01bb670ac9.patch?full_index=1"
+      sha256 "c7026330b5c89ab399e74aff17019067705011b7e35b9c75f9ed1a5878f53b4b"
+    end
+  end
 
   livecheck do
     url :stable
