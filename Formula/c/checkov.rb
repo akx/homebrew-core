@@ -3,9 +3,15 @@ class Checkov < Formula
 
   desc "Prevent cloud misconfigurations during build-time for IaC tools"
   homepage "https://www.checkov.io/"
+  # checkov should only be updated every 10 releases on multiples of 10
   url "https://files.pythonhosted.org/packages/1a/a0/55aa80115ad3b6011ece55ed1e2e2ee8fa352c9d2b6a066d5ea56c72be1b/checkov-3.2.30.tar.gz"
   sha256 "dca00fe8f0e04fd4fde88de5143bbe01aae7966351cd0f70f69456313bd43428"
   license "Apache-2.0"
+
+  livecheck do
+    url "https://pypi.org/rss/project/checkov/releases.xml"
+    regex(%r{<title>v?(\d+(?:\.\d+)*\.\d*0)</title>}i)
+  end
 
   bottle do
     sha256 cellar: :any,                 arm64_sonoma:   "6650301b491fea31b686c042acc4ae7ffcc26fccdc0e3c0f8c0af8e45d512d25"
