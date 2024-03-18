@@ -10,7 +10,7 @@ class AwscliAT1 < Formula
 
   livecheck do
     url "https://github.com/aws/aws-cli.git"
-    regex(/^v?(1(?:\.\d+)+)$/i)
+    regex(/^v?(1(?:\.\d+)*\.\d*0)$/i)
   end
 
   bottle do
