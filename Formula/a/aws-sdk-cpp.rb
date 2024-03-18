@@ -8,6 +8,20 @@ class AwsSdkCpp < Formula
   license "Apache-2.0"
   head "https://github.com/aws/aws-sdk-cpp.git", branch: "main"
 
+  livecheck do
+    url :stable
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
+    strategy :git do |tags, regex|
+      tags.map do |tag|
+        version = tag[regex, 1]
+        next if version.blank?
+        next unless (version.split(".")[-1].to_i % 15).zero?
+
+        version
+      end
+    end
+  end
+
   bottle do
     sha256 cellar: :any,                 arm64_sonoma:   "00d6ed4a1d44cf57cec6dfe90a45c731e77fbd89bc2e7e10b118a5c09091a772"
     sha256 cellar: :any,                 arm64_ventura:  "300751fb3130117e188b6eedcd416e0bfacc3279c49ec78cc5cba53d5ed13f64"
